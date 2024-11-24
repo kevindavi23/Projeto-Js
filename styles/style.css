@@ -1,0 +1,63 @@
+body{
+    background-color: rgb(85, 85, 238);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+#conteiner{
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 40%;
+    background-color: white;
+    border-radius: 20px;
+    align-items: center;
+    
+
+}
+label{
+    font-size: 1.25rem;
+    margin: 2px;
+    width: 52%;
+}
+input{
+    height: auto;
+    padding: 10px;
+    width: 50%;
+    margin: 2px;
+    border: 2px solid rgb(167, 166, 166) ;
+    border-radius: 5px;
+ 
+}
+button{
+    justify-self: end;
+    padding: 10px;
+    height: 50px;
+    width: 50%;
+    border: 2px solid rgb(167, 166, 166);
+    border-radius: 7px;
+    background-color: rgb(85, 85, 238); ;
+    color: white;
+    margin-top: 20px;
+}
+h1{
+    margin-bottom: 5%;
+    color: rgb(85, 85, 238); 
+}
+#animes{
+    height: 10%;
+    
+    width: 52.5%;
+
+    border: 2px solid rgb(167, 166, 166) ;
+    border-radius: 5px;
+    
+}
+button:active {
+    transform: scale(0.9); /* Reduz o tamanho ao clicar */
+  }
+
+  
