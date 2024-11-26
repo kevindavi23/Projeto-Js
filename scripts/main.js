@@ -14,28 +14,27 @@ let emailIn = document.querySelector("#email")
 let senhaIn = document.querySelector("#senha")
 let botao = document.querySelector("#Cadastrar")
 let select = document.querySelector("select")
-
-/*for (const option of select.options){
-    console.log(option,"ue");
-    option.addEventListener("click",function(){
-        console.log("entrou aqui")
-        console.log(option.selected)
-        if(option.selected){
-            option.select = false;
-        }
-        else{
-            option.selected = true; 
-            console.log("selecionou")
-        }   
-     })
-}*/
-
+const emailError = document.getElementById("emailError");
+const passwordError = document.getElementById("passwordError");
 
 if(botao != null){
     
     botao.addEventListener("click",function(){
         if (lista == null){
             lista = []
+        }
+            // Validação de e-mail (RegEx para verificar formato de e-mail)
+        const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegEx.test(emailIn.value)) {
+        emailError.textContent = 'Formato de e-mail inválido';
+        return;
+        }
+
+        // Validação de senha (mínimo de 8 caracteres, com pelo menos 1 letra e 1 número)
+        const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!passwordRegEx.test(senhaIn.value)) {
+        passwordError.textContent = 'A senha deve ter no mínimo 8 caracteres, incluindo letras e números.';
+        return;
         }
         if (emailIn.value != "" && senhaIn.value != ""){   
             for (const option of select.options){
@@ -51,7 +50,7 @@ if(botao != null){
             let myItem = JSON.parse(localStorage.getItem("lista"));
             console.log(lista[0])
             window.location.href = "./login.html";
-    }
+        }
 })}
 
 
@@ -61,17 +60,47 @@ botaoLogin = document.querySelector("#login");
 
 if(botaoLogin != null){
     botaoLogin.addEventListener("click",function(){
-        if (emailIn.value != "" && senhaIn.value != ""){
-            for (elemento of lista){
-                if (elemento.email == emailIn.value && elemento.senha == senhaIn.value){
-                    console.log("login com sucesso")
-                    localStorage.setItem("usuario",JSON.stringify(elemento));
-                    window.location.href = "./home.html";
-                    
+        // Validação de e-mail (RegEx para verificar formato de e-mail)
+    const emailRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegEx.test(emailIn.value)) {
+      emailError.textContent = 'Formato de e-mail inválido';
+      return;
+    }
+
+    // Validação de senha (mínimo de 8 caracteres, com pelo menos 1 letra e 1 número)
+    const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRegEx.test(senhaIn.value)) {
+      passwordError.textContent = 'A senha deve ter no mínimo 8 caracteres, incluindo letras e números.';
+      return;
+    }
+
+    async function login(){
+        try{
+            const response = await fetch('https://projetoweb-api.vercel.app/auth/login', {
+                body: {
+                    email: emailIn.value,
+                    password: senhaIn.value
+                },
+                method: 'POST'
+            }).then(response => response);
+
+            if (response.ok) {
+                for (elemento of lista) {
+                    if (elemento.email == emailIn.value && elemento.senha == senhaIn.value) {
+                        console.log("login com sucesso")
+                        localStorage.setItem("usuario", JSON.stringify(elemento));
+                        window.location.href = "./home.html";
+
+                    }
                 }
-            }
-            console.log("terminou o for") 
+            };
+        }catch(error){
+            console.log(error);
         }
+    }
+
+    login();
+        
     })
 }
 
