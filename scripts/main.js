@@ -104,6 +104,35 @@ if(botaoLogin != null){
     })
 }
 
+
+async function registerUser() {
+    try {
+        const response = await fetch('https://projetoweb-api.vercel.app/users', {
+            method: 'POST',
+            body: JSON.stringify({
+                nome: nomeIn.value,  
+                email: emailIn.value, 
+                senha: senhaIn.value,
+                animes: animesFav  
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Cadastro bem-sucedido!', data);
+            window.location.href = './login.html'; 
+        } else {
+            const errorData = await response.json();
+            console.error('Erro ao cadastrar usuário:', errorData);
+            alert('Erro ao cadastrar, tente novamente!');
+        }
+    } catch (error) {
+        console.error('Erro de rede:', error.message);
+        alert('Ocorreu um erro. Tente novamente mais tarde.');
+    }
+}
+
+  
 //Codigo para pagina Home
 let conteudo = document.querySelector("#conteudo");
 if(conteudo != null){
