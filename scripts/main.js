@@ -9,13 +9,14 @@ let animes = [{nome: "Naruto", imagem: "https://imgsrv.crunchyroll.com/cdn-cgi/i
     {nome: "Jujstu Kaisen", imagem: "https://br.web.img3.acsta.net/pictures/20/09/14/10/31/4875617.jpg"}
 ]
 
-let nomeIn = document.querySelector("#nome")
-let emailIn = document.querySelector("#email")
-let senhaIn = document.querySelector("#senha")
+const nomeIn = document.getElementById("nome");
+const emailIn = document.getElementById("email");
+const senhaIn = document.getElementById("password");
+
 let botao = document.querySelector("#Cadastrar")
 let select = document.querySelector("select")
-const emailError = document.getElementById("emailError");
-const passwordError = document.getElementById("passwordError");
+const emailError = document.getElementById("error");
+const passwordError = document.getElementById("error");
 
 if(botao != null){
     
@@ -69,7 +70,7 @@ if(botaoLogin != null){
 
     // Validação de senha (mínimo de 8 caracteres, com pelo menos 1 letra e 1 número)
     const passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (!passwordRegEx.test(senhaIn.value)) {
+    if (!passwordRegEx.test(senhaIn)) {
       passwordError.textContent = 'A senha deve ter no mínimo 8 caracteres, incluindo letras e números.';
       return;
     }
@@ -86,7 +87,7 @@ if(botaoLogin != null){
 
             if (response.ok) {
                 for (elemento of lista) {
-                    if (elemento.email == emailIn.value && elemento.senha == senhaIn.value) {
+                    if (elemento.email == emailIn && elemento.senha == senhaIn) {
                         console.log("login com sucesso")
                         localStorage.setItem("usuario", JSON.stringify(elemento));
                         window.location.href = "./home.html";
