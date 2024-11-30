@@ -20,8 +20,6 @@ async function retornarAnimes() {
     
 }
 
-
-
 const nomeIn = document.getElementById("nome");
 const emailIn = document.getElementById("email");
 const senhaIn = document.getElementById("password");

@@ -6,7 +6,6 @@ body{
     height: 100vh;
     margin: 0;
     font-family: 'Arial', sans-serif;
-
 }
 
 #conteiner{
@@ -41,8 +40,6 @@ input{
     margin: 2px;
     border: 2px solid rgb(167, 166, 166) ;
     border-radius: 5px;
-    
- 
 }
 
 button{
@@ -71,7 +68,4 @@ h1{
 
 button:active {
     transform: scale(0.9); /* Reduz o tamanho ao clicar */
-
-  }
-
-  
+}
